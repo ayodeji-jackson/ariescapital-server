@@ -21,6 +21,8 @@ const app: Application = express();
 const PORT: string | number = process.env.PORT || 3000;
 const mongoString = process.env.DATABASE_URL;
 
+app.set('trust proxy', 1); 
+
 app.use(express.json());
 app.use(session(sessionOptions));
 app.use(cors(corsOptions));
