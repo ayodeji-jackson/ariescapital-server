@@ -12,6 +12,7 @@ specifiers:
   dotenv: ^16.0.3
   express: ^4.18.2
   express-session: ^1.17.3
+  module-alias: ^2.2.2
   mongoose: ^7.0.1
   nodemon: ^2.0.22
   ts-node: ^10.9.1
@@ -25,6 +26,7 @@ dependencies:
   cors: 2.8.5
   express: 4.18.2
   express-session: 1.17.3
+  module-alias: 2.2.2
   mongoose: 7.0.1
   zod: 3.21.4
 
@@ -860,6 +862,10 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+    dev: false
+
+  /module-alias/2.2.2:
+    resolution: {integrity: sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q==}
     dev: false
 
   /mongodb-connection-string-url/2.6.0:

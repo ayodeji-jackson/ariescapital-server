@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import express, { Application } from "express";
 import mongoose, { Types } from "mongoose";
 import dotenv from "dotenv";
