@@ -5,6 +5,7 @@ specifiers:
   '@types/cors': ^2.8.13
   '@types/express': ^4.17.17
   '@types/express-session': ^1.17.6
+  '@types/module-alias': ^2.0.1
   '@types/node': ^18.15.3
   bcrypt: ^5.1.0
   connect-mongo: ^5.0.0
@@ -16,11 +17,11 @@ specifiers:
   mongoose: ^7.0.1
   nodemon: ^2.0.22
   ts-node: ^10.9.1
-  tsconfig-paths: ^4.1.2
   typescript: ^4.9.5
   zod: ^3.21.4
 
 dependencies:
+  '@types/module-alias': 2.0.1
   bcrypt: 5.1.0
   connect-mongo: 5.0.0_express-session@1.17.3
   cors: 2.8.5
@@ -39,7 +40,6 @@ devDependencies:
   dotenv: 16.0.3
   nodemon: 2.0.22
   ts-node: 10.9.1_cbfmry4sbbh4vatmdrsmatfg5a
-  tsconfig-paths: 4.1.2
   typescript: 4.9.5
 
 packages:
@@ -152,6 +152,10 @@ packages:
   /@types/mime/3.0.1:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
     dev: true
+
+  /@types/module-alias/2.0.1:
+    resolution: {integrity: sha512-DN/CCT1HQG6HquBNJdLkvV+4v5l/oEuwOHUPLxI+Eub0NED+lk0YUfba04WGH90EINiUrNgClkNnwGmbICeWMQ==}
+    dev: false
 
   /@types/node/18.15.3:
     resolution: {integrity: sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==}
@@ -752,12 +756,6 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: true
 
-  /json5/2.2.3:
-    resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
-    engines: {node: '>=6'}
-    hasBin: true
-    dev: true
-
   /kareem/2.5.1:
     resolution: {integrity: sha512-7jFxRVm+jD+rkq3kY0iZDJfsO2/t4BBPeEb2qKn2lR/9KhuksYk5hxzfRYWMPV8P/x2d0kHD306YyWLzjjH+uA==}
     engines: {node: '>=12.0.0'}
@@ -833,10 +831,6 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
-
-  /minimist/1.2.8:
-    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
-    dev: true
 
   /minipass/3.3.6:
     resolution: {integrity: sha512-DxiNidxSEK+tHG6zOIklvNOwm3hvCrbUrdtzY74U6HKTJxvIDfOUL5W5P2Ghd3DTkhhKPYGqeNUIh5qcM4YBfw==}
@@ -1271,11 +1265,6 @@ packages:
       ansi-regex: 5.0.1
     dev: false
 
-  /strip-bom/3.0.0:
-    resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
-    engines: {node: '>=4'}
-    dev: true
-
   /supports-color/5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
     engines: {node: '>=4'}
@@ -1354,15 +1343,6 @@ packages:
       typescript: 4.9.5
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
-    dev: true
-
-  /tsconfig-paths/4.1.2:
-    resolution: {integrity: sha512-uhxiMgnXQp1IR622dUXI+9Ehnws7i/y6xvpZB9IbUVOPy0muvdvgXeZOn88UcGPiT98Vp3rJPTa8bFoalZ3Qhw==}
-    engines: {node: '>=6'}
-    dependencies:
-      json5: 2.2.3
-      minimist: 1.2.8
-      strip-bom: 3.0.0
     dev: true
 
   /type-is/1.6.18:

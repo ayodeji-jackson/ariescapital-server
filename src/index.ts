@@ -1,4 +1,10 @@
-import 'module-alias/register';
+import { addAliases } from 'module-alias';
+addAliases({
+  "@src": __dirname, 
+  "@models": __dirname + '/models', 
+  "@routes": __dirname + "/routes", 
+  "@schema": __dirname + "/schema"
+},)
 import express, { Application } from "express";
 import mongoose, { Types } from "mongoose";
 import dotenv from "dotenv";
@@ -20,8 +26,6 @@ dotenv.config();
 const app: Application = express();
 const PORT: string | number = process.env.PORT || 3000;
 const mongoString = process.env.DATABASE_URL;
-
-app.set('trust proxy', 1); 
 
 app.use(express.json());
 app.use(session(sessionOptions));
