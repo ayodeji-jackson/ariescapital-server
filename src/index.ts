@@ -10,14 +10,19 @@ import mongoose, { Types } from "mongoose";
 import dotenv from "dotenv";
 import { default as authRouter } from "./routes/auth.routes";
 import { default as userRouter } from './routes/user.routes';
-import { errorHandler } from "./middleware";
+import { default as depositRouter } from './routes/deposit.routes'; 
+import { default as withdrawalRouter } from './routes/withdrawal.routes'; 
+import { default as walletRouter } from './routes/wallet.routes'; 
+import { default as miscRouter } from './routes/misc.routes'; 
+import { auth, errorHandler } from "./middleware";
 import session from "express-session";
 import { corsOptions, sessionOptions } from "./config";
 import cors from "cors";
 
 declare module "express-session" {
   interface Session {
-    userId: Types.ObjectId;
+    userId: Types.ObjectId; 
+    userRole: "admin" | "user"; 
   }
 }
 
@@ -30,9 +35,14 @@ const mongoString = process.env.DATABASE_URL;
 app.use(express.json());
 app.use(session(sessionOptions));
 app.use(cors(corsOptions));
+app.use(auth);
 
 app.use(authRouter);
 app.use(userRouter); 
+app.use(depositRouter);
+app.use(withdrawalRouter); 
+app.use(walletRouter); 
+app.use(miscRouter); 
 
 app.use(errorHandler);
 
