@@ -48,4 +48,13 @@ router.route('/withdrawals').get(async (req: Request, res: Response, next: NextF
   }
 });
 
+router.route('/withdrawals/:id').put(validate(NoUserWithdrawalSchema.partial()), async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await WithdrawalModel.findByIdAndUpdate(req.params.id, req.body); 
+    res.status(204).json({ });
+  } catch (err) {
+    next(err); 
+  }
+});
+
 export default router; 
