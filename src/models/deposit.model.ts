@@ -11,10 +11,13 @@ const DepositSchema = new Schema<Deposit>({
     type: Number, 
     required: true, 
   }, 
-  depositMethod: { type: String }, 
-  requestDate: { type: Date }, 
-  status: { type: String }
-}, { timestamps: true });
+  method: { type: String },
+  status: { 
+    type: String, 
+    enum: ["pending", "confirmed"]
+  }, 
+  plan: { type: String }
+}, { timestamps: { createdAt: "requestDate" } });
 const DepositModel = model<Deposit>('deposit', DepositSchema); 
 
 export default DepositModel; 
