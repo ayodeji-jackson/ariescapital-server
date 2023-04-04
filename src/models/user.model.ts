@@ -1,3 +1,4 @@
+import { ROLES } from "../constants";
 import { Schema, model } from "mongoose";
 import { User } from "../schema/user.schema";
 
@@ -18,7 +19,7 @@ const UserSchema = new Schema<User>({
     unique: true, 
   }, 
   phone: {
-    type: Number, 
+    type: String, 
     required: true,
   }, 
   referrer: {
@@ -29,6 +30,10 @@ const UserSchema = new Schema<User>({
   password: {
     type: String, 
     required: true, 
+  }, 
+  role: {
+    type: String, 
+    enum: ROLES
   }
 }, { timestamps: true });
 const UserModel = model<User>('user', UserSchema);

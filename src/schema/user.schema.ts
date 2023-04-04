@@ -7,10 +7,11 @@ export const UserSchema = z.object({
     required_error: "email address is required", 
     invalid_type_error: "invalid email" 
   }).email(), 
-  phone: z.number({ required_error: "phone number is required" }), 
+  phone: z.string({ required_error: "phone number is required" }), 
   referrer: z.string({ description: "referrer id"}).optional().default(""), 
   country: z.string({ required_error: "country is required" }), 
-  password: z.string({ required_error: "password is required" })
+  password: z.string({ required_error: "password is required" }), 
+  role: z.enum(["user", "admin"]).optional().default("user")
 });
 
 export const UserLoginSchema = z.object({

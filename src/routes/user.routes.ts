@@ -5,10 +5,8 @@ import { isValidObjectId } from "mongoose";
 const router = Router(); 
 
 router.route('/users/:id').get(async (req: Request, res: Response, next: NextFunction) => {
-  if (!isValidObjectId(req.params.id)) {
-    res.json({ error: "invalid user id" }); 
-    return; 
-  }
+  if (!isValidObjectId(req.params.id)) 
+    return res.json({ error: "invalid user id" }); 
   try {
     const user = await UserModel.findById(req.params.id);
     if (user) res.json({ 
