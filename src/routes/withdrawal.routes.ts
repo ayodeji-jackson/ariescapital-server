@@ -38,8 +38,10 @@ router.route('/withdrawals').get(async (req: Request, res: Response, next: NextF
     } 
 
     const confirmedWithdrawals = WithdrawalModel.find({ by: req.session.userId, status: 'confirmed' }); 
-    if (req.query.field == 'amount')
-      return res.json(await confirmedWithdrawals.select('amount')); 
+    if (req.query.field == 'amount') {
+      if (req.session.userRole == 'user') return res.json(await confirmedWithdrawals.select('amount')); 
+      return res.json(await WithdrawalModel.find({ status: 'confirmed' }).select('amount')); 
+    }
     else if (req.query.status == 'confirmed') 
       return res.json(await confirmedWithdrawals); 
     res.json(await WithdrawalModel.find({ by: req.session.userId }).select('amount requestDate walletAddress status')); 
@@ -52,6 +54,15 @@ router.route('/withdrawals/:id').put(validate(NoUserWithdrawalSchema.partial()),
   try {
     await WithdrawalModel.findByIdAndUpdate(req.params.id, req.body); 
     res.status(204).json({ });
+  } catch (err) {
+    next(err); 
+  }
+});
+
+router.route('/withdrawals/:id').delete(async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await WithdrawalModel.findByIdAndDelete(req.params.id); 
+    res.status(204).json({ }); 
   } catch (err) {
     next(err); 
   }

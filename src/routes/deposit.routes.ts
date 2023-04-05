@@ -52,8 +52,10 @@ router.route('/deposits').get(async (req: Request, res: Response, next: NextFunc
     } 
 
     const confirmedDeposits = DepositModel.find({ by: req.session.userId, status: 'confirmed' }); 
-    if (req.query.field == 'amount')
-      return res.json(await confirmedDeposits.select('amount')); 
+    if (req.query.field == 'amount') {
+      if (req.session.userRole == 'user') return res.json(await confirmedDeposits.select('amount')); 
+      return res.json(await DepositModel.find({ status: 'confirmed' }).select('amount')); 
+    }
     else if (req.query.status == 'confirmed') 
       return res.json(await confirmedDeposits); 
     res.json(await DepositModel.find({ by: req.session.userId }).select('amount plan requestDate method status')); 

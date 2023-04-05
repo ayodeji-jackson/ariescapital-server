@@ -8,7 +8,13 @@ const router = Router();
 
 router.route('/auth/register').post(validate(UserSchema), async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await UserModel.create({ ...req.body, password: bcrypt.hashSync(req.body.password, 10) });
+    const user = await UserModel.create({ 
+      ...req.body,
+      password: bcrypt.hashSync(req.body.password, 10) 
+    });
+    
+    req.session.userId = user.id; 
+    req.session.userRole = user.role; 
     res.status(201).json({ id: user.id, role: user.role });
   } catch (err) {
     return next(err); 

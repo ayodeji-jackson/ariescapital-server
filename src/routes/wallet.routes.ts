@@ -5,13 +5,13 @@ import { WalletSchema } from "@schema/wallet.schema";
 
 const router = Router(); 
 
-router.route('/wallets/:type').put(validate(WalletSchema.omit({ type: true })), async (req: Request, res: Response, next: NextFunction) => {
+router.route('/wallets').put(validate(WalletSchema.partial()), async (req: Request, res: Response, next: NextFunction) => {
   try {
-    if (!await WalletModel.findOne({ type: req.params.type })) {
-      await WalletModel.create({ type: req.params.type, address: req.body.address }); 
+    if (!await WalletModel.findOne({ owner: req.session.userId })) {
+      await WalletModel.create({ owner: req.session.userId, ...req.body}); 
       res.status(200).json({ });
     } else {
-      await WalletModel.updateOne({ type: req.params.type }, { address: req.body.address }); 
+      await WalletModel.updateOne({ owner: req.session.userId }, req.body); 
       res.status(204).json({ }); 
     }
   } catch (err) {
@@ -19,11 +19,9 @@ router.route('/wallets/:type').put(validate(WalletSchema.omit({ type: true })), 
   }
 });
 
-router.route('/wallets/:type').get(async (req: Request, res: Response, next: NextFunction) => {
+router.route('/wallets').get(async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const wallet = await WalletModel.findOne({ type: req.params.type });
-    if (!wallet) return res.status(200).json({ address: '' }); 
-    res.status(200).json(wallet); 
+    res.json(await WalletModel.findOne({ owner: req.session.userId }));
   } catch (err) {
     next(err); 
   }

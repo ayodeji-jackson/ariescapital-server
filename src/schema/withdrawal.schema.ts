@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const WithdrawalSchema = z.object({
   by: z.custom<Types.ObjectId>(
-    (val) => isValidObjectId(val), { message: "payer id not found" }
+    (val) => isValidObjectId(val), { message: "invalid withdrawer id" }
   ), 
   amount: z.number({
     required_error: "deposit amount is required"

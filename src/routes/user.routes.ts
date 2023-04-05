@@ -21,4 +21,14 @@ router.route('/users/:id').get(async (req: Request, res: Response, next: NextFun
   }
 }); 
 
+router.route('/users').get(async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    if (req.session.userRole == 'admin') 
+      return res.json(await UserModel.find({ role: 'user' })); 
+    else return res.status(401).json({ message: "unauthorized" }); 
+  } catch (err) {
+    next(err); 
+  }
+}); 
+
 export default router; 

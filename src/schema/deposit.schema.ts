@@ -4,7 +4,7 @@ import { z } from "zod";
 
 export const DepositSchema = z.object({
   by: z.custom<Types.ObjectId>(
-    (val) => isValidObjectId(val), { message: "payer id not found" }
+    (val) => isValidObjectId(val), { message: "invalid payer id" }
   ), 
   amount: z.number({
     required_error: "deposit amount is required"
