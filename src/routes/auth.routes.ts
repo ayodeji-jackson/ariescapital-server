@@ -50,9 +50,9 @@ router.route('/auth/login').post(validate(UserLoginSchema), async (req: Request,
   }
 });
 
-router.route('/auth/logout').get((req: Request, _: Response, next: NextFunction) => {
-  req.session.destroy(() => {});
-  next();
+router.route('/auth/logout').get((req: Request, res: Response, _: NextFunction) => {
+  req.session.destroy(() => {}); 
+  return res.status(201).json({ }); 
 })
 
 export default router;
