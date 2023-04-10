@@ -21,7 +21,7 @@ router.route('/wallets').put(validate(WalletSchema.partial()), async (req: Reque
 
 router.route('/wallets').get(async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.json(await WalletModel.findOne({ owner: req.session.userId }));
+    res.json(await WalletModel.findOne());
   } catch (err) {
     next(err); 
   }
