@@ -14,7 +14,8 @@ const DepositSchema = new Schema<Deposit>({
   method: { type: String },
   status: { 
     type: String, 
-    enum: ["pending", "confirmed"]
+    enum: ["pending", "confirmed"], 
+    default: 'pending'
   }, 
   plan: { type: String }
 }, { timestamps: { createdAt: "requestDate" } });

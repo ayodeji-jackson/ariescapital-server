@@ -1,17 +1,15 @@
 import UserModel from "@models/user.model";
 import WithdrawalModel from "@models/withdrawal.model";
-import { NoUserWithdrawal, NoUserWithdrawalSchema } from "@schema/withdrawal.schema";
+import { WithdrawalSchema } from "@schema/withdrawal.schema";
 import { NextFunction, Request, Response, Router } from "express";
 import { validate } from "../middleware";
 
 const router = Router(); 
 
-router.route('/withdrawals').post(validate(NoUserWithdrawalSchema), async (req: Request, res: Response, next: NextFunction) => {
-  const { amount, walletAddress }: NoUserWithdrawal = req.body; 
+router.route('/withdrawals').post(validate(WithdrawalSchema.omit({ by: true })), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const withdrawal = await WithdrawalModel.create({
-      by: req.session.userId, amount, walletAddress, 
-      status: 'pending'
+      by: req.session.userId, ...req.body
     }); 
     res.status(201).json({ id: withdrawal.id }); 
   } catch (err) {
@@ -50,7 +48,7 @@ router.route('/withdrawals').get(async (req: Request, res: Response, next: NextF
   }
 });
 
-router.route('/withdrawals/:id').put(validate(NoUserWithdrawalSchema.partial()), async (req: Request, res: Response, next: NextFunction) => {
+router.route('/withdrawals/:id').put(validate(WithdrawalSchema.partial()), async (req: Request, res: Response, next: NextFunction) => {
   try {
     await WithdrawalModel.findByIdAndUpdate(req.params.id, req.body); 
     res.status(204).json({ });

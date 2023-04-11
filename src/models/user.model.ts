@@ -36,6 +36,10 @@ const UserSchema = new Schema<User>({
     type: String, 
     required: true, 
   }, 
+  profit: {
+    type: Number, 
+    default: 0
+  }, 
   role: {
     type: String, 
     enum: ROLES, 

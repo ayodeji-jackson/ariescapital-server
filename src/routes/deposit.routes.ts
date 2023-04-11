@@ -1,17 +1,16 @@
 import { NextFunction, Request, Response, Router } from "express";
 import DepositModel from "@models/deposit.model";
 import { validate } from "../middleware";
-import { NoUserDeposit, NoUserDepositSchema } from "@schema/deposit.schema";
+import { DepositSchema } from "@schema/deposit.schema";
 import UserModel from "@models/user.model";
 
 const router: Router = Router(); 
 
-router.route('/deposits').post(validate(NoUserDepositSchema), async (req: Request, res: Response, next: NextFunction) => {
-  const { plan, method, amount }: NoUserDeposit = req.body; 
+router.route('/deposits').post(validate(DepositSchema.omit({ by: true })), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const deposit = await DepositModel.create({ 
       by: req.session.userId, 
-      amount, method, plan, status: "pending", 
+      ...req.body
     });
     res.status(201).json({ id: deposit.id }); 
   } catch (err) {
@@ -64,7 +63,7 @@ router.route('/deposits').get(async (req: Request, res: Response, next: NextFunc
   }
 });
 
-router.route('/deposits/:id').put(validate(NoUserDepositSchema.partial()), async (req: Request, res: Response, next: NextFunction) => {
+router.route('/deposits/:id').put(validate(DepositSchema.partial()), async (req: Request, res: Response, next: NextFunction) => {
   try {
     await DepositModel.findByIdAndUpdate(req.params.id, req.body); 
     res.status(204).json({ });

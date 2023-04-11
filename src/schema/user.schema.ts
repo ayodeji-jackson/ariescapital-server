@@ -11,6 +11,7 @@ export const UserSchema = z.object({
   referrer: z.string({ description: "referrer id"}).optional().default(""), 
   country: z.string({ required_error: "country is required" }), 
   password: z.string({ required_error: "password is required" }), 
+  profit: z.number({ description: 'user profit' }).optional().default(0), 
   role: z.enum(["user", "admin"]).optional().default("user")
 });
 

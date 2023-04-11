@@ -17,7 +17,8 @@ const WithdrawalSchema = new Schema<Withdrawal>({
   }, 
   status: { 
     type: String, 
-    enum: ["pending", "confirmed"]
+    enum: ["pending", "confirmed"], 
+    default: 'pending'
   }, 
 }, { timestamps: { createdAt: "requestDate" } });
 const WithdrawalModel = model<Withdrawal>('withdrawal', WithdrawalSchema); 

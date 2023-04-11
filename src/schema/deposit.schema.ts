@@ -23,7 +23,5 @@ export const DepositSchema = z.object({
     invalid_type_error: "invalid plan"
   })
 });
-export const NoUserDepositSchema = DepositSchema.omit({ by: true }); 
 
 export type Deposit = z.infer<typeof DepositSchema>;
-export type NoUserDeposit = z.infer<typeof NoUserDepositSchema>

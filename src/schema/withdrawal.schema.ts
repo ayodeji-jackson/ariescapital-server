@@ -18,7 +18,5 @@ export const WithdrawalSchema = z.object({
     invalid_type_error: "invalid status"
   }).optional().default('pending'), 
 });
-export const NoUserWithdrawalSchema = WithdrawalSchema.omit({ by: true });
 
 export type Withdrawal = z.infer<typeof WithdrawalSchema>; 
-export type NoUserWithdrawal = z.infer<typeof NoUserWithdrawalSchema>; 

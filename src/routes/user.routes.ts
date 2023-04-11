@@ -1,6 +1,8 @@
 import UserModel from "@models/user.model";
 import { NextFunction, Request, Response, Router } from "express";
+import { validate } from "../middleware";
 import { isValidObjectId } from "mongoose";
+import { UserSchema } from "@schema/user.schema";
 
 const router = Router(); 
 
@@ -26,6 +28,15 @@ router.route('/users').get(async (req: Request, res: Response, next: NextFunctio
     if (req.session.userRole == 'admin') 
       return res.json(await UserModel.find({ role: 'user' })); 
     else return res.status(401).json({ message: "unauthorized" }); 
+  } catch (err) {
+    next(err); 
+  }
+}); 
+
+router.route('/users/:id/profit').put(validate(UserSchema.partial()), async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await UserModel.findByIdAndUpdate(req.params.id, { $inc: { profit: req.body.profit }}); 
+    res.status(204).json({ });
   } catch (err) {
     next(err); 
   }
