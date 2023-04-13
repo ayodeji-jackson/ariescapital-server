@@ -40,6 +40,11 @@ const UserSchema = new Schema<User>({
     type: Number, 
     default: 0
   }, 
+  target: {
+    type: Number, 
+    enum: [0, 30, 50, 100, 200], 
+    default: 0
+  }, 
   role: {
     type: String, 
     enum: ROLES, 

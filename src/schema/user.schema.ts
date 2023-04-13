@@ -12,6 +12,7 @@ export const UserSchema = z.object({
   country: z.string({ required_error: "country is required" }), 
   password: z.string({ required_error: "password is required" }), 
   profit: z.number({ description: 'user profit' }).optional().default(0), 
+  target: z.union([z.literal(0), z.literal(30), z.literal(50), z.literal(100), z.literal(200)]).optional().default(0), 
   role: z.enum(["user", "admin"]).optional().default("user")
 });
 

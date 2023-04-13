@@ -15,7 +15,8 @@ router.route('/users/:id').get(async (req: Request, res: Response, next: NextFun
       id: user.id, 
       firstName: user.firstName, 
       lastName: user.lastName, 
-      email: user.email
+      email: user.email, 
+      target: user.target, 
      }); 
     else res.json({ error: "user does not exist" });
   } catch (err) {
@@ -25,17 +26,28 @@ router.route('/users/:id').get(async (req: Request, res: Response, next: NextFun
 
 router.route('/users').get(async (req: Request, res: Response, next: NextFunction) => {
   try {
-    if (req.session.userRole == 'admin') 
-      return res.json(await UserModel.find({ role: 'user' })); 
+    if (req.session.userRole == 'admin') {
+      const user = await UserModel.find({ role: 'user' })
+      return res.json(user.map(user => {
+        return user.profit == undefined ? { ...user, profit: 0 } : user
+      })); 
+    }
     else return res.status(401).json({ message: "unauthorized" }); 
   } catch (err) {
     next(err); 
   }
 }); 
 
-router.route('/users/:id/profit').put(validate(UserSchema.partial()), async (req: Request, res: Response, next: NextFunction) => {
+router.route('/users/:id').put(validate(UserSchema.partial()), async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await UserModel.findByIdAndUpdate(req.params.id, { $inc: { profit: req.body.profit }}); 
+    switch (req.query.field) {
+      case 'profit': 
+        await UserModel.findByIdAndUpdate(req.params.id, { $inc: { profit: req.body.profit }}); 
+        break; 
+      default: 
+        await UserModel.findByIdAndUpdate(req.params.id, req.body); 
+        break; 
+    }
     res.status(204).json({ });
   } catch (err) {
     next(err); 
