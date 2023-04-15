@@ -7,7 +7,7 @@ export const errorHandler = (err: Error, _: Request, res: Response, next: NextFu
 }
 
 export const auth = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.session.userId && req.path != '/auth/login' && req.path != '/auth/register')
+  if (!req.session.userId && !req.session.userIsVerified && !req.path.startsWith('/auth/'))
     return res.status(401).json({ message: "unauthorized" });
   next();
 };
