@@ -23,6 +23,7 @@ declare module "express-session" {
   interface Session {
     userId: Types.ObjectId; 
     userRole: "admin" | "user"; 
+    userIsVerified: boolean; 
   }
 }
 

@@ -7,6 +7,7 @@ specifiers:
   '@types/express-session': ^1.17.6
   '@types/module-alias': ^2.0.1
   '@types/node': ^18.15.3
+  '@types/nodemailer': ^6.4.7
   bcrypt: ^5.1.0
   connect-mongo: ^5.0.0
   cors: ^2.8.5
@@ -15,6 +16,7 @@ specifiers:
   express-session: ^1.17.3
   module-alias: ^2.2.2
   mongoose: ^7.0.1
+  nodemailer: ^6.9.1
   nodemon: ^2.0.22
   ts-node: ^10.9.1
   typescript: ^4.9.5
@@ -28,6 +30,7 @@ dependencies:
   express-session: 1.17.3
   module-alias: 2.2.2
   mongoose: 7.0.1
+  nodemailer: 6.9.1
   zod: 3.21.4
 
 devDependencies:
@@ -37,6 +40,7 @@ devDependencies:
   '@types/express-session': 1.17.6
   '@types/module-alias': 2.0.1
   '@types/node': 18.15.3
+  '@types/nodemailer': 6.4.7
   dotenv: 16.0.3
   nodemon: 2.0.22
   ts-node: 10.9.1_cbfmry4sbbh4vatmdrsmatfg5a
@@ -159,6 +163,12 @@ packages:
 
   /@types/node/18.15.3:
     resolution: {integrity: sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==}
+
+  /@types/nodemailer/6.4.7:
+    resolution: {integrity: sha512-f5qCBGAn/f0qtRcd4SEn88c8Fp3Swct1731X4ryPKqS61/A3LmmzN8zaEz7hneJvpjFbUUgY7lru/B/7ODTazg==}
+    dependencies:
+      '@types/node': 18.15.3
+    dev: true
 
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
@@ -953,6 +963,11 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
+    dev: false
+
+  /nodemailer/6.9.1:
+    resolution: {integrity: sha512-qHw7dOiU5UKNnQpXktdgQ1d3OFgRAekuvbJLcdG5dnEo/GtcTHRYM7+UfJARdOFU9WUQO8OiIamgWPmiSFHYAA==}
+    engines: {node: '>=6.0.0'}
     dev: false
 
   /nodemon/2.0.22:

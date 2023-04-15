@@ -45,6 +45,10 @@ const UserSchema = new Schema<User>({
     enum: [0, 30, 50, 100, 200], 
     default: 0
   }, 
+  isVerified: {
+    type: Boolean, 
+    default: false
+  }, 
   role: {
     type: String, 
     enum: ROLES, 
