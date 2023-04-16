@@ -5,6 +5,10 @@ import { NextFunction, Request, Response, Router } from "express";
 
 const router = Router(); 
 
+router.route('/').get((_: Request, res: Response) => {
+  res.json({ message: 'alive' });
+});
+
 router.route('/balance').get(async (req: Request, res: Response, next: NextFunction) => {
   try {
     const [deposits, withdrawals, user] = await Promise.all([
