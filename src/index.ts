@@ -31,7 +31,6 @@ dotenv.config();
 
 const app: Application = express();
 const PORT: string | number = process.env.PORT || 3000;
-const mongoString = process.env.DATABASE_URL;
 
 app.set('trust proxy', 1); 
 app.use(express.json());
@@ -48,10 +47,11 @@ app.use(miscRouter);
 
 app.use(errorHandler);
 
-mongoose.connect(mongoString!);
+mongoose.connect(process.env.DATABASE_URL!);
 mongoose.connection.on('error', err => console.log(err));
-mongoose.connection.once('connected', () => console.log('database connected'));
-
-app.listen(PORT, () => {
-  console.log(`Server started at ${PORT}`)
+mongoose.connection.once('connected', () => {
+  console.log('database connected');
+  app.listen(PORT, () => {
+    console.log(`Server started at ${PORT}`)
+  });
 });
