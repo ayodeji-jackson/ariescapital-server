@@ -23,7 +23,7 @@ router.route('/auth/register').post(validate(UserSchema), async (req: Request, r
 });
 
 router.route('/auth/login').get(async (req: Request, res: Response, next: NextFunction) => {
-  if (!req.session.userId) return res.status(403).json({ error: "you're not logged in" });
+  // if (!req.session.userId) return res.status(403).json({ error: "you're not logged in" });
   try {
     const user = await UserModel.findById(req.session.userId); 
     // TODO: check if user is verified and send unauthorized
