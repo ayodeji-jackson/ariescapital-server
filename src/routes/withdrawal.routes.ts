@@ -25,7 +25,8 @@ router.route('/withdrawals').get(async (req: Request, res: Response, next: NextF
       return res.json(withdrawals.map((withdrawal, i) => {
         return {
           id: withdrawal.id, 
-          amount: withdrawal.amount, 
+          amount: withdrawal.amount,
+          walletAddress: withdrawal.walletAddress,
           requestDate: withdrawal.requestDate, 
           firstName: userDetails[i]?.firstName, 
           lastName: userDetails[i]?.lastName, 
