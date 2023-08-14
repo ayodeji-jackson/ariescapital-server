@@ -11,14 +11,14 @@ router.route('/').get((_: Request, res: Response) => {
 
 router.route('/balance').get(async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const [deposits, withdrawals, user] = await Promise.all([
+    const [deposits, user] = await Promise.all([
       DepositModel.find({ by: req.session.userId, status: 'confirmed' }).select("amount"), 
-      WithdrawalModel.find({ by: req.session.userId, status: 'confirmed' }).select('amount'), 
+      // WithdrawalModel.find({ by: req.session.userId, status: 'confirmed' }).select('amount'), 
       UserModel.findById(req.session.userId).select('profit')
     ]); 
 
-    const balance = deposits.map(d => d.amount).reduce((a, b) => a + b, 0) - 
-      withdrawals.map(w => w.amount).reduce((a, b) => a + b, 0); 
+    const balance = deposits.map(d => d.amount).reduce((a, b) => a + b, 0);
+      // - withdrawals.map(w => w.amount).reduce((a, b) => a + b, 0); 
     res.json({ value: balance + (user?.profit || 0) }); 
   } catch (err) {
     next(err); 
