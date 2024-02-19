@@ -17,6 +17,7 @@ router.route('/users/:id').get(async (req: Request, res: Response, next: NextFun
       lastName: user.lastName, 
       email: user.email, 
       target: user.target, 
+      profit: user.profit
      }); 
     else res.json({ error: "user does not exist" });
   } catch (err) {
